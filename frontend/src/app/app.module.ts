@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { TransactionComponent } from './components/transaction/transaction.component';
 import { TransactionsService } from './services/transactions.service';
 import { FilterComponent } from './components/filter/filter.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,7 +14,8 @@ import { FilterComponent } from './components/filter/filter.component';
     FilterComponent,
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule,
   ],
   providers: [TransactionsService],
   bootstrap: [AppComponent]

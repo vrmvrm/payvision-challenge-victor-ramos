@@ -48,6 +48,8 @@ export class AppComponent implements OnInit {
       value: 'GBP',
     },
   ];
+  action: string;
+  currency: string;
 
   constructor(private transactionsService: TransactionsService) {}
 
@@ -55,7 +57,24 @@ export class AppComponent implements OnInit {
     this.getTransactions();
   }
 
+  onClick() {
+    this.getTransactions();
+  }
+
+  getSelected(value) {
+    if (value.name === 'actions') {
+      this.action = value.value;
+    }
+    if (value.name === 'currencies') {
+      this.currency = value.value;
+    }
+  }
+
   private async getTransactions() {
-    this.transactions = await this.transactionsService.getTransactions(undefined);
+    const params = {
+      action: this.action,
+      currencyCode: this.currency,
+    };
+    this.transactions = await this.transactionsService.getTransactions(params);
   }
 }

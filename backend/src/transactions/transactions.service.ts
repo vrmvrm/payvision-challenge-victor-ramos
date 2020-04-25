@@ -12,7 +12,7 @@ export class TransactionsService {
     private readonly cardBrands = [
         {
             regex: /^5[1-5]/,
-            brand: 'Mastercard',
+            brand: 'MasterCard',
         },
         {
             regex: /^3[47]/,
@@ -28,13 +28,14 @@ export class TransactionsService {
         },
         {
             regex: /^4/,
-            brand: 'Visa',
+            brand: 'VISA',
         },
     ];
     constructor(private readonly config: ConfigService) {}
 
     private async makeRequest(params?: TransactionQueryDto): Promise<TransactionEntity[]> {
         try {
+            console.log(params);
             const response = await axios.get(
                 this.endpoint,
                 {

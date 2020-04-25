@@ -17,7 +17,7 @@ export class TransactionQueryDto {
     })
     @IsOptional()
     @IsEnum(currencies)
-    currency?: string;
+    currencyCode?: string;
 }
 
 
