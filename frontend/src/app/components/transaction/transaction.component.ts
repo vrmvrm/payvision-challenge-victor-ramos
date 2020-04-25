@@ -10,7 +10,5 @@ export class TransactionComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {
-        console.log(this.transaction);
-    }
+    ngOnInit() {}
 }

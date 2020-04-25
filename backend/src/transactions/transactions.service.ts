@@ -35,7 +35,6 @@ export class TransactionsService {
 
     private async makeRequest(params?: TransactionQueryDto): Promise<TransactionEntity[]> {
         try {
-            console.log(params);
             const response = await axios.get(
                 this.endpoint,
                 {
