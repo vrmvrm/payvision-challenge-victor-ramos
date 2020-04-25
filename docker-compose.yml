@@ -1,0 +1,14 @@
+version: "3"
+services:
+  backend:
+    build:
+      dockerfile: backend.Dockerfile
+      context: .
+    ports:
+      - "3000:3000"
+    environment:
+      SITE: local
+      ENDPOINT: https://jovs5zmau3.execute-api.eu-west-1.amazonaws.com/prod
+      USERNAME: code-challenge
+      PASSWORD: payvisioner
+
