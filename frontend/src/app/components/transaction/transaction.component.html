@@ -1,0 +1,74 @@
+<div class="row">
+    <div class="row-column-big">
+        {{transaction.card.holderName}}
+    </div>
+    <div class="row-column-big">
+        {{transaction.brand}}
+    </div>
+    <div class="row-column-big">
+        {{transaction.card.lastFourDigits}}
+    </div>
+    <div class="row-column-big">
+        {{transaction.action | titlecase}}
+    </div>
+    <div class="row-column-small">
+        {{transaction.amount}}
+    </div>
+    <div class="row-column-small">
+        {{transaction.currencyCode}}
+    </div>
+</div>
+<div class="info-row">
+    <div class="info-column">
+        <div>
+            ID:
+        </div>
+        <div>
+            {{transaction.id}}
+        </div>
+    </div>
+    <div class="info-column">
+        <div>
+            Firts 6 digits:
+        </div>
+        <div>
+            {{transaction.card.firstSixDigits}}
+        </div>
+    </div>
+</div>
+<div class="info-row">
+    <div class="info-column">
+        <div>
+            Tracking code:
+        </div>
+        <div>
+            {{transaction.trackingCode}}
+        </div>
+    </div>
+    <div class="info-column">
+        <div>
+            Expiry month:
+        </div>
+        <div>
+            {{transaction.card.expiryMonth}}
+        </div>
+    </div>
+</div>
+<div class="info-row">
+    <div class="info-column">
+        <div>
+            Brand ID:
+        </div>
+        <div>
+            {{transaction.brandId}}
+        </div>
+    </div>
+    <div class="info-column">
+        <div>
+            Expiry year:
+        </div>
+        <div>
+            {{transaction.card.expiryYear}}
+        </div>
+    </div>
+</div>

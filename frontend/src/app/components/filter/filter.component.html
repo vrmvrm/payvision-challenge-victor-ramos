@@ -1,0 +1,3 @@
+<select [name]="name" ngModel>
+    <option [value]="filter.value" *ngFor="let filter of filters">{{filter.name}}</option>
+</select>
