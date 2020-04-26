@@ -8,16 +8,9 @@ import { FilterComponent } from './components/filter/filter.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TransactionComponent,
-    FilterComponent,
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-  ],
+  declarations: [AppComponent, TransactionComponent, FilterComponent],
+  imports: [BrowserModule, FormsModule],
   providers: [TransactionsService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

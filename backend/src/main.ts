@@ -13,7 +13,12 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
   app.setGlobalPrefix(prefix);
-  app.useGlobalPipes(new ValidationPipe({ whitelist: true, validationError: { target: false, value: false } }));
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      validationError: { target: false, value: false },
+    }),
+  );
   setSecurity(app);
   const config = app.get(ConfigService);
   const port: number = config.get<number>('application.port');
