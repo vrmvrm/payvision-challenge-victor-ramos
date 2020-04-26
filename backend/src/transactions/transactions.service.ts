@@ -3,8 +3,10 @@ import {
   NotFoundException,
   BadRequestException,
   InternalServerErrorException,
+  ForbiddenException,
 } from '@nestjs/common';
 import axios from 'axios';
+import * as HttpStatusCodes from 'http-status-codes';
 
 import { ConfigService } from '../config/config.service';
 import {
@@ -13,63 +15,39 @@ import {
   TransactionResponseDto,
 } from './dto/transaction.dto';
 
+import { transactionFormat } from './utils/format/format.utils';
+
 @Injectable()
 export class TransactionsService {
   private readonly endpoint = this.config.get<string>('api.endpoint');
   private readonly username = this.config.get<string>('api.username');
   private readonly password = this.config.get<string>('api.password');
-  private readonly cardBrands = [
-    {
-      regex: /^5[1-5]/,
-      brand: 'MasterCard',
-    },
-    {
-      regex: /^3[47]/,
-      brand: 'AMEX',
-    },
-    {
-      regex: /^6(?:011|5[0-9]{2})/,
-      brand: 'Discover',
-    },
-    {
-      regex: /^3(?:0[0-5]|[68][0-9])/,
-      brand: 'Diners Club',
-    },
-    {
-      regex: /^4/,
-      brand: 'VISA',
-    },
-  ];
+
   constructor(private readonly config: ConfigService) {}
 
   private async makeRequest(
     params?: TransactionQueryDto,
   ): Promise<TransactionEntity[]> {
     try {
-      const response = await axios.get(this.endpoint, {
+      const { data } = await axios.get(this.endpoint, {
         auth: {
           username: this.username,
           password: this.password,
         },
         params,
       });
-      return response.data;
+      return data;
     } catch (e) {
-      if (e.response.status === 400) {
-        throw new BadRequestException('Invalid filters');
-      } else {
-        throw new InternalServerErrorException();
+      const { status, message } = e.response || e;
+      switch (status) {
+        case HttpStatusCodes.BAD_REQUEST:
+          throw new BadRequestException('Invalid filters');
+        case HttpStatusCodes.FORBIDDEN:
+          throw new ForbiddenException('Invalid api credentials');
+        default:
+          throw new InternalServerErrorException(message);
       }
     }
-  }
-
-  private getCardBrand(transaction: TransactionEntity): string {
-    for (const { regex, brand } of this.cardBrands) {
-      if (transaction.card.firstSixDigits.match(regex)) {
-        return brand;
-      }
-    }
-    return 'not brand';
   }
 
   async getTransaction(id: string): Promise<TransactionResponseDto> {
@@ -78,26 +56,13 @@ export class TransactionsService {
     if (!transaction) {
       throw new NotFoundException('Transaction not found!');
     }
-    const brand: string = this.getCardBrand(transaction);
-    const transactionFormatted: TransactionResponseDto = {
-      ...transaction,
-      brand,
-    };
-    return transactionFormatted;
+    return transactionFormat(transaction);
   }
 
   async getTransactions(
     params: TransactionQueryDto,
   ): Promise<TransactionResponseDto[]> {
     const transactions: TransactionEntity[] = await this.makeRequest(params);
-    const transactionsFormatted: TransactionResponseDto[] = transactions.map(
-      t => {
-        return {
-          ...t,
-          brand: this.getCardBrand(t),
-        };
-      },
-    );
-    return transactionsFormatted;
+    return transactions.map(transactionFormat);
   }
 }

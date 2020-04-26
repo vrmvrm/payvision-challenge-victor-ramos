@@ -30,6 +30,7 @@
     "dotenv": "^8.2.0",
     "express-rate-limit": "^5.1.1",
     "helmet": "^3.22.0",
+    "http-status-codes": "^1.4.0",
     "reflect-metadata": "^0.1.13",
     "request-promise": "^4.2.5",
     "rimraf": "^3.0.2",

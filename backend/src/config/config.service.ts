@@ -39,11 +39,11 @@ export class ConfigService {
   private loadConfiguration() {
     const { NODE_ENV } = process.env;
     if (!NODE_ENV) return;
-    const path: string = `${__dirname}/configs/${NODE_ENV}`;
+    const path = `${__dirname}/configs/${NODE_ENV}`;
     const availableExt: string[] = ['ts', 'js', 'json'];
-    let foundExt: boolean = false;
+    let foundExt = false;
     for (const ext of availableExt) {
-      const fullPath: string = `${path}.${ext}`;
+      const fullPath = `${path}.${ext}`;
       if (fs.existsSync(fullPath)) {
         const configEnv = require(fullPath).default;
         this.config = _.merge(this.config, configEnv);
