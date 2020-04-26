@@ -5,13 +5,13 @@ This backend retrieve all the transactions information using payvision api
 # Technologies
 
 - Typescript
-- NestJS (https://nestjs.com/)
+- NestJS
 
 # Environment variables
 ## Payvision credentials
-ENDPOINT= Payvision endpoint
-USERNAME= Payvision username
-PASSWORD= Paysivion password
+ENDPOINT = Payvision endpoint
+USERNAME = Payvision username
+PASSWORD = Paysivion password
 
 # Run
 Npm:
