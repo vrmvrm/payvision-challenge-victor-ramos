@@ -62,6 +62,9 @@ export class AppComponent implements OnInit {
   }
 
   getSelected(value) {
+    if (value.value === 'null') {
+      value.value = undefined;
+    }
     if (value.name === 'actions') {
       this.action = value.value;
     }

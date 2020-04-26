@@ -1,11 +1,13 @@
-<div class="filter">
-  <app-filter [filters]="actions" name="actions" (value)="getSelected($event)"></app-filter>
-</div>
-<div class="filter">
-  <app-filter [filters]="currencies" name="currencies" (value)="getSelected($event)"></app-filter>
-</div>
 <div class="search">
-  <button (click)="onClick()">Search</button>
+  <div class="filter-actions">
+    <app-filter [filters]="actions" name="actions" (value)="getSelected($event)"></app-filter>
+  </div>
+  <div class="filter-currencies">
+    <app-filter [filters]="currencies" name="currencies" (value)="getSelected($event)"></app-filter>
+  </div>
+  <div class="search-button">
+    <button (click)="onClick()">Search</button>
+  </div>
 </div>
 <div class="header">
   <div class="header-column-big">

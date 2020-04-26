@@ -1,4 +1,4 @@
-<div class="row">
+<div [class]="show ? 'row-info' : 'row'" (click)="onClick()">
     <div class="row-column-big">
         {{transaction.card.holderName}}
     </div>
@@ -18,57 +18,45 @@
         {{transaction.currencyCode}}
     </div>
 </div>
-<div class="info-row">
-    <div class="info-column">
-        <div>
-            ID:
-        </div>
-        <div>
-            {{transaction.id}}
-        </div>
+<div *ngIf="show" class="info-row">
+    <div class="title">
+        ID:
     </div>
-    <div class="info-column">
-        <div>
-            Firts 6 digits:
-        </div>
-        <div>
-            {{transaction.card.firstSixDigits}}
-        </div>
+    <div class="details">
+        {{transaction.id}}
+    </div>
+    <div class="title">
+        Firts 6 digits:
+    </div>
+    <div class="details">
+        {{transaction.card.firstSixDigits}}
     </div>
 </div>
-<div class="info-row">
-    <div class="info-column">
-        <div>
-            Tracking code:
-        </div>
-        <div>
-            {{transaction.trackingCode}}
-        </div>
+<div *ngIf="show" class="info-row">
+    <div class="title">
+        Tracking code:
     </div>
-    <div class="info-column">
-        <div>
-            Expiry month:
-        </div>
-        <div>
-            {{transaction.card.expiryMonth}}
-        </div>
+    <div class="details">
+        {{transaction.trackingCode}}
+    </div>
+    <div class="title">
+        Expiry month:
+    </div>
+    <div class="details">
+        {{transaction.card.expiryMonth}}
     </div>
 </div>
-<div class="info-row">
-    <div class="info-column">
-        <div>
-            Brand ID:
-        </div>
-        <div>
-            {{transaction.brandId}}
-        </div>
+<div *ngIf="show" class="info-row">
+    <div class="title">
+        Brand ID:
     </div>
-    <div class="info-column">
-        <div>
-            Expiry year:
-        </div>
-        <div>
-            {{transaction.card.expiryYear}}
-        </div>
+    <div class="details">
+        {{transaction.brandId}}
+    </div>
+    <div class="title">
+        Expiry year:
+    </div>
+    <div class="details">
+        {{transaction.card.expiryYear}}
     </div>
 </div>
