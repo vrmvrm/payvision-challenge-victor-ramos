@@ -8,7 +8,7 @@ services:
       - "3000:3000"
     environment:
       SITE: local
-      ENDPOINT: https://jovs5zmau3.execute-api.eu-west-1.amazonaws.com/prod
+      ENDPOINT: https://jovs5zmau3.execute-api.eu-west-1.amazonaws.com/prod/transactions
       USERNAME: code-challenge
       PASSWORD: payvisioner
   frontend:
@@ -17,3 +17,5 @@ services:
       context: .
     ports:
       - "4200:4200"
+    depends_on: 
+      - backend
