@@ -1,11 +1,7 @@
-FROM node:12
-
-WORKDIR /srv/app/frontend
-
+FROM node:12.7-alpine AS build
+WORKDIR /usr/src/app
 COPY frontend .
-
-RUN npm i
-
-EXPOSE 4200
-
+RUN npm install
+COPY frontend .
+RUN npm run build
 CMD [ "npm", "start" ]
