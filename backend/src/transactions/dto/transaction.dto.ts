@@ -1,8 +1,8 @@
 import { ApiModelPropertyOptional, ApiResponseModelProperty } from "@nestjs/swagger";
 import { IsOptional, IsEnum } from 'class-validator';
 
-const actions = ['payment', 'credit', 'authorize'];
-const currencies = ['EUR', 'USD', 'JPY', 'GBP'];
+const actions = ['payment', 'credit'];
+const currencies = ['EUR', 'USD', 'JPY'];
 
 export class TransactionQueryDto {
     @ApiModelPropertyOptional({

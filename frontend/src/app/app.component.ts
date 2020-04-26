@@ -21,10 +21,6 @@ export class AppComponent implements OnInit {
       name: 'Credit',
       value: 'credit',
     },
-    {
-      name: 'Authorize',
-      value: 'authorize',
-    },
   ];
   public currencies = [
     {
@@ -42,10 +38,6 @@ export class AppComponent implements OnInit {
     {
       name: 'JPY',
       value: 'JPY',
-    },
-    {
-      name: 'GBP',
-      value: 'GBP',
     },
   ];
   action: string;
