@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { TransactionResponseDto } from 'src/app/services/dto/transaction.dto';
 
 @Component({
   selector: 'app-transaction',
@@ -6,8 +7,9 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./transaction.component.css'],
 })
 export class TransactionComponent implements OnInit {
-  @Input() transaction: any = {};
+  @Input() transaction: TransactionResponseDto;
   public show = false;
+
   constructor() {}
 
   ngOnInit() {}

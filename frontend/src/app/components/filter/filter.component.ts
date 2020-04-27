@@ -6,8 +6,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./filter.component.css'],
 })
 export class FilterComponent implements OnInit {
-  @Input() filters = {};
-  @Input() name = {};
+  @Input() filters: any = {};
+  @Input() name: string;
 
   @Output() value = new EventEmitter<any>();
   selected: string;

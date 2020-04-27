@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionsService } from './services/transactions.service';
+import { TransactionResponseDto, TransactionQueryDto } from './services/dto/transaction.dto';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +8,7 @@ import { TransactionsService } from './services/transactions.service';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  public transactions;
+  public transactions: TransactionResponseDto[];
   public actions = [
     {
       name: 'Transaction type',
@@ -66,7 +67,7 @@ export class AppComponent implements OnInit {
   }
 
   private async getTransactions() {
-    const params = {
+    const params: TransactionQueryDto = {
       action: this.action,
       currencyCode: this.currency,
     };
