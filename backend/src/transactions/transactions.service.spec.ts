@@ -1,6 +1,4 @@
-import { Test, TestingModule } from '@nestjs/testing';
 import { TransactionsService } from './transactions.service';
-import { ConfigService } from '../config/config.service';
 import {
   TransactionQueryDto,
   TransactionResponseDto,
@@ -9,28 +7,44 @@ import { NotFoundException, BadRequestException } from '@nestjs/common';
 
 describe('TransactionsService', () => {
   let service: TransactionsService;
+  
+  const apiService = {
+    getTransactions: jest.fn()
+  }
+
+  const exampleTransaction = {
+    id: 1,
+    card: {
+      firstSixDigits: '123'
+    }
+  }
 
   beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      providers: [TransactionsService, ConfigService],
-    }).compile();
-
-    service = module.get<TransactionsService>(TransactionsService);
+    service = new TransactionsService(apiService as any)
   });
+
+  afterEach(() => {
+    apiService.getTransactions.mockClear()
+  })
+
 
   it('should be defined', () => {
     expect(service).toBeDefined();
   });
 
   it('should return a transactions array', async () => {
+    apiService.getTransactions.mockImplementation(() => ([exampleTransaction]))
     const params: TransactionQueryDto = {};
     const newTransactions: TransactionResponseDto[] = await service.getTransactions(
       params,
     );
-    expect(newTransactions.length).toBeGreaterThan(0);
+    expect(newTransactions.length).toEqual(1);
   });
 
   it('should throw a bad request exception', async () => {
+    apiService.getTransactions.mockImplementation(() => {
+      throw new BadRequestException('Invalid filters')
+    })
     const error = new BadRequestException('Invalid filters');
     const params: TransactionQueryDto = {
       action: '',
@@ -39,6 +53,7 @@ describe('TransactionsService', () => {
   });
 
   it('should return a transaction element', async () => {
+    apiService.getTransactions.mockImplementation(() => ([exampleTransaction]))
     const params: TransactionQueryDto = {};
     const transactions: TransactionResponseDto[] = await service.getTransactions(
       params,
@@ -51,6 +66,7 @@ describe('TransactionsService', () => {
   });
 
   it('should throw a not found expection', async () => {
+    apiService.getTransactions.mockImplementation(() => ([exampleTransaction]))
     const error = new NotFoundException('Transaction not found!');
     await expect(service.getTransaction('')).rejects.toThrow(error);
   });
