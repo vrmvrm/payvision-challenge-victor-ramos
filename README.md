@@ -22,7 +22,7 @@ Hello everyone! My name is Víctor Ramos and this is my fullstack challenge (htt
 I decided to use an architecture based on services, this means creating a service for each functionality.
 The reason for using this architecture is because it makes the maintenance of the software much easier as well as adding more functionalities.
 
-#### TypeScript
+### TypeScript
 TypeScript is based on JavasScript but as its name indicates it has types. This makes the code more readable and avoid some errors when the application is running.
 
 ### NestJS
